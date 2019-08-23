@@ -26,7 +26,8 @@ func test() {
 	close := make(chan bool)
 	err = db.C("news", close).Insert(&struct{ Title string }{"123"})
 	err = db.C("news", close).Insert(&struct{ Title string }{"DEF"})
-	close <- true
+	close <- true //关闭会话
+	db.Close() //关闭连接
 	fmt.Println(err)
 }
  ```
